@@ -1,4 +1,5 @@
-import classes from './Logo.module.css';
+import * as React from 'react'
+import classes from './Logo.module.css'
 
 const Logo = () => {
   return (
@@ -6,7 +7,7 @@ const Logo = () => {
       <img className={classes.img} src="/logo.svg" alt="LearnHub logo" />
       <span>LearnHub</span>
     </div>
-  );
-};
+  )
+}
 
-export default Logo;
+export default Logo

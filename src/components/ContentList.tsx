@@ -1,3 +1,4 @@
+import * as React from 'react'
 import useContentList from '../hooks/useContentList'
 import ContentCard from './ContentCard'
 import Loading from './Loading'

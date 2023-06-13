@@ -3,7 +3,7 @@ import { host } from '../constant'
 import { ChildProps, IAuthContext } from '../types/auth.context'
 
 /* Typescript section, JS guys can ignore for now */
-export interface AuthProviderProps extends ChildProps {}
+export type AuthProviderProps = ChildProps
 type UserInfo = Pick<IAuthContext, 'id' | 'token'>
 
 type LoginFunc = IAuthContext['login']

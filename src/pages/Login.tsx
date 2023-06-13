@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { FormEvent, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthProvider'
@@ -44,7 +45,7 @@ const Login = () => {
       </form>
 
       <h2 className={classes.subtitle}>
-        <Link to="/register">Don't have an account? Register</Link>
+        <Link to="/register">{`Don't have an account? Register`}</Link>
       </h2>
     </div>
   )

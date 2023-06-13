@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactStars from 'react-stars'
 import Loading from '../components/Loading'
@@ -55,13 +55,7 @@ const Edit = () => {
         <div className={classes.formGroup}>
           <div className={classes.ratingContainer}>
             <label>Rating</label>
-            <ReactStars
-              count={5}
-              value={rating}
-              size={42}
-              half={false}
-              color2="#ff731d"
-            />
+            <ReactStars count={5} value={rating} size={42} half={false} color2="#ff731d" />
           </div>
         </div>
         <div className={classes.formGroup}>

@@ -1,3 +1,4 @@
+import * as React from 'react'
 import classes from './Banner.module.css'
 
 const Banner = () => {

@@ -1,13 +1,14 @@
-import classes from './Error.module.css';
+import * as React from 'react'
+import classes from './Error.module.css'
 
 interface ErrorProps {
-  message?: string;
+  message?: string
 }
 
 const Error = (props: ErrorProps) => {
-  const { message = 'Something went wrong' } = props;
+  const { message = 'Something went wrong' } = props
 
-  return <div className={classes.error}>{message}</div>;
-};
+  return <div className={classes.error}>{message}</div>
+}
 
-export default Error;
+export default Error

@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Loading from '../components/Loading'
 import { useAuth } from '../contexts/AuthProvider'
@@ -31,12 +32,7 @@ const Content = () => {
           <div className={classes.commentFooter}>
             <p>
               {[...Array(rating).keys()].map((star) => (
-                <img
-                  key={star}
-                  className={classes.icon}
-                  src="/star.svg"
-                  alt="Rating Star"
-                />
+                <img key={star} className={classes.icon} src="/star.svg" alt="Rating Star" />
               ))}
             </p>
             <p>
@@ -45,13 +41,12 @@ const Content = () => {
             {
               /*
               TODO: update the conditional rendering here, if you chosen to work with isOwnPost function, please continue to work on AuthProvider.tsx, otherwise you can use `id` from useAuth()
-               */ isOwnPost &&
-                isOwnPost(data!) && (
-                  <Link to={`/content/${postId}/edit`}>
-                    <img className={classes.icon} src="/edit.svg" alt="Edit" />
-                    Edit
-                  </Link>
-                )
+               */ isOwnPost && isOwnPost(data!) && (
+                <Link to={`/content/${postId}/edit`}>
+                  <img className={classes.icon} src="/edit.svg" alt="Edit" />
+                  Edit
+                </Link>
+              )
             }
           </div>
         </div>
