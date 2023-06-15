@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ContentListHook } from '../types/contentList.hook'
 import { ContentDto } from '../types/dto'
+import { host } from '../constant'
 
 const useContentList = (): ContentListHook => {
   const [data, setData] = useState<ContentDto[] | null>(null)
@@ -12,14 +13,14 @@ const useContentList = (): ContentListHook => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
-      try{
-        const res = await fetch('https://api.learnhub.thanayut.in.th/content')
+      try {
+        const res = await fetch(`https://${host}/content`)
         const dataApi = await res.json()
 
         setData(dataApi.data)
-      }catch (err) {
+      } catch (err) {
         setError(err)
-      }finally{
+      } finally {
         setLoading(false)
       }
     }

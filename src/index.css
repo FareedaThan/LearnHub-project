@@ -2,10 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+:root {
+  --primary: #F5EFE7;
+  --secondary: #D8C4B6;
+  --blue: #4F709C;
+  --navy: #213555;
+  --yellow: #FFC26F;
 }
 
 body {
@@ -15,6 +32,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--primary);
 }
 
 code {

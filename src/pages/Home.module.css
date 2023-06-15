@@ -8,15 +8,15 @@
   padding: 12px 16px;
   border: none;
   border-radius: 4px;
-  background-color: #ff731d;
-  color: #fff;
+  background-color: var(--navy);
+  color: var(--primary);
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
 }
 
 .button:hover {
-  background-color: #fa6a10;
+  background-color: var(--blue);
 }
 
 @media (max-width: 768px) {

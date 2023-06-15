@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 48px;
-  background-color: #fff7e9;
+  background-color: var(--navy);
 }
 
 .nav {
@@ -11,7 +11,7 @@
   align-items: center;
   gap: 32px;
   font-weight: bold;
-  color: #ff731d;
+  color: var(--primary);
   font-size: 16px;
 }
 
@@ -20,7 +20,7 @@
 }
 
 .activeLink {
-  color: #ef5b0c;
+  color: var(--secondary);
 }
 
 @media (max-width: 768px) {

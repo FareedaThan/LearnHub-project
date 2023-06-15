@@ -1,43 +1,66 @@
 .container {
-  width: 60%;
+  width: 50%;
   max-width: 1440px;
   margin: 32px auto;
-  background-color: antiquewhite;
+  background-color: var(--blue);
   border-radius: 10px;
 }
 
 .content {
   display: flex;
   flex-direction: column;
+  padding: 30px;
+}
+
+.playerWrapper {
+  margin: 20px 30px;
+
 }
 
 .title {
-  font-size: 23px;
+  font-size: 30px;
   font-weight: bold;
-  color: #ff731d;
+  color: var(--primary);
   text-align: center;
 }
 
 .creator {
   font-size: 20px;
-  color: rgb(107 114 128);
-  text-align: center;
+  font-weight: 700;
+  color: var(--secondary);
+  text-align: right;
+  font-style: italic;
 }
 
 .emdash {
   margin-right: 4px;
 }
 
-.commentFooter {
-  font-size: 16px;
+.commentBox {
+  background-color: white;
+  width: 100%;
+  border-radius: 5px;
+  margin: auto;
+  padding: 15px;
+
 }
-
-
 .commentText {
   font-size: 18px;
   font-weight: normal;
   font-style: italic;
   line-height: 1.4;
+}
+
+.commentFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  font-size: 16px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
 }
 
 .icon {

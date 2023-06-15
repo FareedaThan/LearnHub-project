@@ -10,6 +10,7 @@ import Create from './pages/Create'
 import Edit from './pages/Edit'
 import Home from './pages/Home'
 import Login from './pages/Login'
+import Register from './pages/Register'
 
 function App() {
   return (
@@ -23,9 +24,8 @@ function App() {
           <Route path="/content/:id" element={<Content />} />
           <Route path="/content/:id/edit" element={<Edit />} />
           <Route path="*" element={<Error message="Page Not Found" />} />
-          {/* 
+
           <Route path="/register" element={<Register />} />
-           */}
         </Routes>
       </Layout>
     </AuthProvider>

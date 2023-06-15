@@ -4,11 +4,16 @@ import ReactStars from 'react-stars'
 import { useAuth } from '../contexts/AuthProvider'
 import withGuard from '../guards/withGuard'
 import classes from './Create.module.css'
+import { host } from '../constant'
+import { Navigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 
 const Create = () => {
   const [rating, setRating] = useState(0)
   const [isSubmitting, setSubmitting] = useState(false)
-  const { getAuthHeader, token } = useAuth() // Hint: we may need auth token for posting new content
+  const [inputUrl, setInputUrl] = useState('')
+  const [inputComment, setInputComment] = useState('')
+  const { getAuthHeader } = useAuth() // Hint: we may need auth token for posting new content
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -17,12 +22,36 @@ const Create = () => {
 
     try {
       // TODO: Try post new blog to server
-    } catch (err) {
+      const res = await fetch(`https://${host}/content`, {
+        method: 'POST',
+        body: JSON.stringify({
+          videoUrl: inputUrl,
+          comment: inputComment,
+          rating: rating,
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+          // Authorization: `Bearer ${token}`,
+          // function below return object so we should destruct when using it
+          ...getAuthHeader(),
+        },
+      })
+      const data = await res.json()
+      toast.success('Create post success')
+      return data
+    } catch (err: any) {
       // TODO: Handling error
+      throw new Error(err.message)
     } finally {
       setSubmitting(false)
     }
   }
+
+  const setStarValue = (newrating: number) => {
+    setRating(newrating)
+  }
+
+  if (isSubmitting) return <Navigate to="/" />
 
   return (
     <div className={classes.container}>
@@ -30,16 +59,22 @@ const Create = () => {
       <form className={classes.form} onSubmit={handleSubmit}>
         <div className={classes.formGroup}>
           <label htmlFor="video-url">Video URL</label>
-          <input type="text" id="video-url" />
+          <input type="text" id="video-url" value={inputUrl} onChange={(e) => setInputUrl(e.target.value)} required />
         </div>
         <div className={classes.formGroup}>
           <label htmlFor="comment">Comment (280 characters maximum)</label>
-          <input type="text" id="comment" />
+          <input
+            type="text"
+            id="comment"
+            value={inputComment}
+            onChange={(e) => setInputComment(e.target.value)}
+            required
+          />
         </div>
         <div className={classes.formGroup}>
           <div className={classes.ratingContainer}>
             <label>Rating</label>
-            <ReactStars count={5} value={rating} size={42} half={false} color2="#ff731d" />
+            <ReactStars count={5} value={rating} size={40} half={false} color2="#ff731d" onChange={setStarValue} />
           </div>
         </div>
         <div className={classes.formGroup}>

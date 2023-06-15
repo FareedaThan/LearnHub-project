@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '../contexts/AuthProvider'
 import { ContentHook } from '../types/content.hook'
 import { ContentDto } from '../types/dto'
+import { host } from '../constant'
 
 /* Typescript section, JS guys can skip for now */
 type EditPostFunc = ContentHook['editPost']
@@ -17,14 +18,14 @@ const useContent = (postId: string): ContentHook => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
-      try{
-        const res = await fetch(`https://api.learnhub.thanayut.in.th/content/${postId}`)
+      try {
+        const res = await fetch(`https://${host}/content/${postId}`)
         const dataApi = await res.json()
 
         setData(dataApi)
-      }catch (err) {
+      } catch (err) {
         setError(err)
-      }finally{
+      } finally {
         setLoading(false)
       }
     }
@@ -32,10 +33,26 @@ const useContent = (postId: string): ContentHook => {
     fetchData()
   }, [])
 
-  // Hint! if you'd like to return usefull editPost function, you may need authorization header from useAuth() here
+  // Hint! if you'd like to return usefull editPost function,
+  // you may need authorization header from useAuth() here
   const { getAuthHeader } = useAuth()
   const editPost: EditPostFunc = async (updateBody) => {
-    // TODO: (Optional) implement editPost function, this function is intended to update content {postId} with given updateBody
+    // TODO: (Optional) implement editPost function,
+    //this function is intended to update content {postId} with given updateBody
+    try {
+      const res = await fetch(`https://${host}/content/${postId}`, {
+        method: 'PATCH',
+        body: JSON.stringify(updateBody),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+          ...getAuthHeader(),
+        },
+      })
+      const data = await res.json()
+      return data
+    } catch (err: any) {
+      throw new Error(err.message)
+    }
   }
 
   return {

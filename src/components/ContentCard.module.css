@@ -1,26 +1,32 @@
 .card {
   display: flex;
   flex-direction: column;
-  background-color: #FFF7F1 ;
-  color:rgb(100 116 139);
+  background-color: var(--blue) ;
+  color: var(--primary);
   border-radius: 8px;
   width: 30%;
+  transition: 0.5s ease;
+}
+
+.card:hover {
+  background-color: rgb(59, 87, 123);
 }
 
 .thumbnail {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .title {
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 800;
 }
 
 .subtitle {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: normal;
 }
 
@@ -49,7 +55,7 @@
   }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 900px) {
   .card {
     width: 80%;
   }

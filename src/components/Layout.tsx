@@ -10,7 +10,7 @@ export type AuthProviderProps = ChildProps
 /* End Typescript section */
 
 const Layout = ({ children }: AuthProviderProps) => {
-  const { isLoggedIn, logout } = useAuth()
+  const { isLoggedIn, logout, ...userInfo } = useAuth()
 
   return (
     <>
@@ -29,6 +29,7 @@ const Layout = ({ children }: AuthProviderProps) => {
           </nav>
         ) : (
           <nav className={classes.nav}>
+            <p className="text-yellow">Welcome, {userInfo.id}!</p>
             <a className={classes.link} onClick={logout}>
               Logout
             </a>
