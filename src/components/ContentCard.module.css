@@ -1,14 +1,17 @@
 .card {
   display: flex;
   flex-direction: column;
-  background-color: #FA4825;
-  color: #fff;
+  background-color: #FFF7F1 ;
+  color:rgb(100 116 139);
+  border-radius: 8px;
+  width: 30%;
 }
 
 .thumbnail {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+  border-radius: 8px;
 }
 
 .title {
@@ -43,5 +46,11 @@
   }
   .subtitle {
     font-size: 14px;
+  }
+}
+
+@media (max-width: 850px) {
+  .card {
+    width: 80%;
   }
 }

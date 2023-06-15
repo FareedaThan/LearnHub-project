@@ -4,6 +4,7 @@ import Loading from '../components/Loading'
 import { useAuth } from '../contexts/AuthProvider'
 import useContent from '../hooks/useContent'
 import classes from './Content.module.css'
+import Error from '../components/Error'
 
 const Content = () => {
   const { id: postId } = useParams()
@@ -15,16 +16,20 @@ const Content = () => {
   const { id, isOwnPost } = useAuth()
 
   // TODO: Display differently given all possible loading, error, and ready state
+  if(loading) return <Loading />
+  if(error) return <Error />
   if (!ready) return <Loading />
 
-  const { videoTitle, comment, rating, postedBy } = data!
+  const { videoTitle, comment, rating, postedBy, creatorName } = data!
 
   return (
     <div className={classes.container}>
       <div className={classes.content}>
-        <div>
+        <header>
           <h4 className={classes.title}>{videoTitle}</h4>
-        </div>
+          <h6 className={classes.creator}>{creatorName}</h6>
+        </header>
+        
 
         <div>
           <p className={classes.commentText}>{comment}</p>

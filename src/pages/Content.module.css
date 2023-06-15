@@ -2,6 +2,8 @@
   width: 60%;
   max-width: 1440px;
   margin: 32px auto;
+  background-color: antiquewhite;
+  border-radius: 10px;
 }
 
 .content {
@@ -10,9 +12,16 @@
 }
 
 .title {
-  font-size: 20px;
+  font-size: 23px;
   font-weight: bold;
   color: #ff731d;
+  text-align: center;
+}
+
+.creator {
+  font-size: 20px;
+  color: rgb(107 114 128);
+  text-align: center;
 }
 
 .emdash {
