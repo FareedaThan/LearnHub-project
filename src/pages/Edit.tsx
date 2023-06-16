@@ -1,5 +1,5 @@
 import React, { FormEvent, useEffect, useState } from 'react'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import ReactStars from 'react-stars'
 import Loading from '../components/Loading'
 import withGuard from '../guards/withGuard'
@@ -14,19 +14,28 @@ const Edit = () => {
     data,
     editPost,
   } = useContent(id || '')
+  const navigate = useNavigate()
 
   // Hint: we may need auth token to patch the upcoming content
   // const { token, getAuthHeader } = useAuth()
   // ORrrrrr, if you decided to put logic in `editPost` function instead,
   // like useAuth() under useContent(), we'd certainly don't need for this line
 
-  const [rating, setRating] = useState(0)
+  const [updateRating, setRating] = useState(0)
   const [isSubmitting, setSubmitting] = useState(false)
   const [editComment, setEditComment] = useState('')
-  const navigate = useNavigate()
 
   useEffect(() => {
     // TODO: What should happen if we later received current content's rating?
+    // const fetchData = async () => {
+    //   try {
+    //     const res = await fetch(`https://${host}/content/${id}`)
+    //     const data = await res.json()
+    //   } catch (err: any) {
+    //     throw new Error(err.message)
+    //   }
+    // }
+    // fetchData()
   }, [data])
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -38,11 +47,10 @@ const Edit = () => {
       // TODO: Try patch new content to server
       await editPost({
         comment: editComment,
-        rating: rating,
+        rating: updateRating,
       })
-      // location.reload()
-      navigate(0)
-      toast.success('Edit post success')
+      toast.success('Post edited!')
+      navigate(`/content/${id}`)
     } catch (err: any) {
       // TODO: Handling error
       throw new Error(err.message)
@@ -55,12 +63,13 @@ const Edit = () => {
     setRating(newrating)
   }
 
+  if (error) return <h1>Error</h1>
   if (loading) return <Loading />
   if (!ready) return <Loading />
 
-  const { comment } = data!
+  const { comment, rating } = data!
 
-  if (isSubmitting) return <Navigate to="/" />
+  // if (isSubmitting) return <Navigate to="/" />
 
   return (
     <div className={classes.container}>
@@ -68,7 +77,13 @@ const Edit = () => {
       <form className={classes.form} onSubmit={handleSubmit}>
         <div className={classes.formGroup}>
           <label htmlFor="comment">Comment (280 characters maximum)</label>
-          <input type="text" id="comment" defaultValue={comment} onChange={(e) => setEditComment(e.target.value)} />
+          <input
+            type="text"
+            id="comment"
+            defaultValue={comment}
+            onChange={(e) => setEditComment(e.target.value)}
+            maxLength={280}
+          />
         </div>
         <div className={classes.formGroup}>
           <div className={classes.ratingContainer}>

@@ -7,6 +7,7 @@ type FetchAuthorizationHeader = {
 
 export interface IAuthContext {
   id: string | null
+  user: string | null
   token: string | null
   isLoggedIn: boolean
   isAlert: boolean

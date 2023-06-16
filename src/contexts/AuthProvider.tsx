@@ -4,7 +4,7 @@ import { ChildProps, IAuthContext } from '../types/auth.context'
 
 /* Typescript section, JS guys can ignore for now */
 export type AuthProviderProps = ChildProps
-type UserInfo = Pick<IAuthContext, 'id' | 'token'>
+type UserInfo = Pick<IAuthContext, 'id' | 'user' | 'token'>
 // Note:Pick get interface and identify number of fields
 
 type LoginFunc = IAuthContext['login']
@@ -39,7 +39,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(!!token)
   const [isAlert, setIsAlert] = React.useState<boolean>(false)
   const [userInfo, setUserInfo] = React.useState<UserInfo>({
-    id: user,
+    id: localStorage.getItem('id'),
+    user: user,
     token: token,
   })
 
@@ -61,13 +62,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       const newToken = data.accessToken
 
       const { id } = await retrieveUserData(newToken)
-      // console.log(id)
 
       // TODO: update login and ALL RELATED STATES after login succeed
       localStorage.setItem('token', newToken)
       localStorage.setItem('user', username)
       setIsLoggedIn(true)
-      setUserInfo({ id: username, token: newToken })
+      setUserInfo({ id, user: username, token: newToken })
       setIsAlert(false)
     } catch (error) {
       // TODO: define how error is handling here
@@ -80,7 +80,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     setIsLoggedIn(false)
-    setUserInfo({ id: null, token: null })
+    setUserInfo({ id: null, user: null, token: null })
   }
 
   const getAuthHeader: GetAuthHeaderFunc = () => ({
@@ -93,7 +93,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     // TODO: (Optional) if you're interested in complete this function,
     // it'll enable you to use isOwnPost from useAuth() in order to
     // decided if each post can be edited
-    return post['postedBy'].username === userInfo.id
+    return post.postedBy.username === userInfo.user
   }
 
   return (

@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/AuthProvider'
 import withGuard from '../guards/withGuard'
 import classes from './Create.module.css'
 import { host } from '../constant'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 
 const Create = () => {
@@ -13,6 +13,7 @@ const Create = () => {
   const [isSubmitting, setSubmitting] = useState(false)
   const [inputUrl, setInputUrl] = useState('')
   const [inputComment, setInputComment] = useState('')
+  const navigate = useNavigate()
   const { getAuthHeader } = useAuth() // Hint: we may need auth token for posting new content
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -37,7 +38,8 @@ const Create = () => {
         },
       })
       const data = await res.json()
-      toast.success('Create post success')
+      toast.success('Post created!')
+      navigate('/')
       return data
     } catch (err: any) {
       // TODO: Handling error
@@ -51,7 +53,7 @@ const Create = () => {
     setRating(newrating)
   }
 
-  if (isSubmitting) return <Navigate to="/" />
+  // if (isSubmitting) return <Navigate to="/" />
 
   return (
     <div className={classes.container}>
@@ -68,13 +70,14 @@ const Create = () => {
             id="comment"
             value={inputComment}
             onChange={(e) => setInputComment(e.target.value)}
+            maxLength={280}
             required
           />
         </div>
         <div className={classes.formGroup}>
           <div className={classes.ratingContainer}>
             <label>Rating</label>
-            <ReactStars count={5} value={rating} size={40} half={false} color2="#ff731d" onChange={setStarValue} />
+            <ReactStars count={5} value={rating} size={40} half={false} color2="#FFC26F" onChange={setStarValue} />
           </div>
         </div>
         <div className={classes.formGroup}>

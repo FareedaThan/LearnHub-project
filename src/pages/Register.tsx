@@ -29,18 +29,15 @@ const Register = () => {
           }),
           headers: {
             'Content-type': 'application/json; charset=UTF-8',
-            // Authorization: `Bearer ${token}`,
-            // function below return object so we should destruct when using it
           },
         })
         const data = await res.json()
-        toast.success('Register success')
+        toast.success('Register success!')
         return data
       } else {
         toast.error('Please check your password')
       }
     } catch (err: any) {
-      // TODO: Handling error
       throw new Error(err.message)
     } finally {
       setSubmitting(false)

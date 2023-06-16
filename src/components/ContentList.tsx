@@ -16,7 +16,8 @@ const ContentList = () => {
   if (!ready) return <Loading />
 
   return (
-    <div className="flex flex-wrap gap-10 justify-between mb-20 mx-10 mt-10 max-md:justify-around">
+    <div className="flex flex-wrap gap-10 justify-start mb-20 mx-10 mt-10 max-md:justify-around ">
+      {/* <div className="grid grid-cols-3 gap-3"> */}
       {data && data.map((content) => <ContentCard key={content.id} {...content} />)}
     </div>
   )

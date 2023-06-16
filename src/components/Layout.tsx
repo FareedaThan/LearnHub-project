@@ -29,7 +29,7 @@ const Layout = ({ children }: AuthProviderProps) => {
           </nav>
         ) : (
           <nav className={classes.nav}>
-            <p className="text-yellow">Welcome, {userInfo.id}!</p>
+            <p className="text-yellow">Welcome, {userInfo.user}!</p>
             <a className={classes.link} onClick={logout}>
               Logout
             </a>

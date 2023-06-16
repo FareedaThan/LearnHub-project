@@ -21,7 +21,7 @@ const Login = () => {
     try {
       // TODO: Try login
       await login(usernameInput, passwordInput)
-      toast.success('Log in success')
+      toast.success('Log in success!')
     } catch (err: any) {
       // TODO: Handling error
       throw new Error(err.message)
