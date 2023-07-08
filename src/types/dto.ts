@@ -8,15 +8,15 @@ export interface ContentDto {
   creatorName: string
   creatorUrl: string
   postedBy: UserDto
-  createdAt: string
-  updatedAt: string
+  createdAt: Date
+  updatedAt: Date
 }
 
 export interface UserDto {
   id: string
   username: string
   name: string
-  registeredAt: string
+  registeredAt: Date
 }
 
 export interface CredentialDto {

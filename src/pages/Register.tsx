@@ -20,7 +20,7 @@ const Register = () => {
     try {
       // TODO: Try login
       if (inputPassword === inputConfirmPassword) {
-        const res = await fetch(`https://${host}/user`, {
+        const res = await fetch(`${host}/user`, {
           method: 'POST',
           body: JSON.stringify({
             username: inputUsername,

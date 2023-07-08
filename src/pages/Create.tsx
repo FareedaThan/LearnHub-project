@@ -10,7 +10,6 @@ import { toast } from 'react-hot-toast'
 
 const Create = () => {
   const [rating, setRating] = useState(0)
-  const [isSubmitting, setSubmitting] = useState(false)
   const [inputUrl, setInputUrl] = useState('')
   const [inputComment, setInputComment] = useState('')
   const navigate = useNavigate()
@@ -18,12 +17,10 @@ const Create = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (isSubmitting) return
-    setSubmitting(true)
 
     try {
       // TODO: Try post new blog to server
-      const res = await fetch(`https://${host}/content`, {
+      const res = await fetch(`${host}/content`, {
         method: 'POST',
         body: JSON.stringify({
           videoUrl: inputUrl,
@@ -44,16 +41,12 @@ const Create = () => {
     } catch (err: any) {
       // TODO: Handling error
       throw new Error(err.message)
-    } finally {
-      setSubmitting(false)
     }
   }
 
   const setStarValue = (newrating: number) => {
     setRating(newrating)
   }
-
-  // if (isSubmitting) return <Navigate to="/" />
 
   return (
     <div className={classes.container}>
@@ -81,9 +74,7 @@ const Create = () => {
           </div>
         </div>
         <div className={classes.formGroup}>
-          <button type="submit" disabled={isSubmitting}>
-            Create
-          </button>
+          <button type="submit">Create</button>
         </div>
       </form>
     </div>

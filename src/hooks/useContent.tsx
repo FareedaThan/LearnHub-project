@@ -19,7 +19,7 @@ const useContent = (postId: string): ContentHook => {
     const fetchData = async () => {
       setLoading(true)
       try {
-        const res = await fetch(`https://${host}/content/${postId}`)
+        const res = await fetch(`${host}/content/${postId}`)
         const dataApi = await res.json()
 
         setData(dataApi)
@@ -40,7 +40,7 @@ const useContent = (postId: string): ContentHook => {
     // TODO: (Optional) implement editPost function,
     //this function is intended to update content {postId} with given updateBody
     try {
-      const res = await fetch(`https://${host}/content/${postId}`, {
+      const res = await fetch(`${host}/content/${postId}`, {
         method: 'PATCH',
         body: JSON.stringify(updateBody),
         headers: {

@@ -4,29 +4,22 @@ import { Link, Navigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthProvider'
 import classes from './Login.module.css'
 import MuiAlert from '../components/MuiAlert'
-import { toast } from 'react-hot-toast'
 
 const Login = () => {
   const { isLoggedIn, isAlert, login } = useAuth()
 
-  const [isSubmitting, setSubmitting] = useState(false)
   const [usernameInput, setUsernameInput] = useState('')
   const [passwordInput, setPasswordInput] = useState('')
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (isSubmitting) return
-    setSubmitting(true)
 
     try {
       // TODO: Try login
       await login(usernameInput, passwordInput)
-      toast.success('Log in success!')
     } catch (err: any) {
       // TODO: Handling error
       throw new Error(err.message)
-    } finally {
-      setSubmitting(false)
     }
   }
 
@@ -47,9 +40,7 @@ const Login = () => {
             <input type="password" id="password" onChange={(e) => setPasswordInput(e.target.value)} required />
           </div>
           <div className={classes.formGroup}>
-            <button type="submit" disabled={isSubmitting}>
-              Login
-            </button>
+            <button type="submit">Login</button>
           </div>
         </form>
 

@@ -9,15 +9,16 @@ const ContentList = () => {
     status: { loading, error, ready },
     data,
   } = useContentList()
-
+  // console.log(data)
   // TODO: Display differently given all possible loading, error, and ready state
   if (loading) return <Loading />
-  if (error) return <Error />
-  if (!ready) return <Loading />
+  if (!ready) {
+    if (error) return <Error message={`${error}`} />
+    return <Loading />
+  }
 
   return (
-    <div className="flex flex-wrap gap-10 justify-start mb-20 mx-10 mt-10 max-md:justify-around ">
-      {/* <div className="grid grid-cols-3 gap-3"> */}
+    <div className="flex flex-wrap gap-10 justify-start mb-20 mt-10 mx-10 max-md:justify-around ">
       {data && data.map((content) => <ContentCard key={content.id} {...content} />)}
     </div>
   )

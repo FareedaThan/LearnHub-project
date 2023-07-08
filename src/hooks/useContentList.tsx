@@ -14,7 +14,7 @@ const useContentList = (): ContentListHook => {
     const fetchData = async () => {
       setLoading(true)
       try {
-        const res = await fetch(`https://${host}/content`)
+        const res = await fetch(`${host}/content`)
         const dataApi = await res.json()
 
         setData(dataApi.data)

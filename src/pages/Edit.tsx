@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactStars from 'react-stars'
 import Loading from '../components/Loading'
@@ -6,6 +6,7 @@ import withGuard from '../guards/withGuard'
 import useContent from '../hooks/useContent'
 import classes from './Edit.module.css'
 import { toast } from 'react-hot-toast'
+import Error from '../components/Error'
 
 const Edit = () => {
   const { id } = useParams()
@@ -22,26 +23,15 @@ const Edit = () => {
   // like useAuth() under useContent(), we'd certainly don't need for this line
 
   const [updateRating, setRating] = useState(0)
-  const [isSubmitting, setSubmitting] = useState(false)
   const [editComment, setEditComment] = useState('')
 
-  useEffect(() => {
-    // TODO: What should happen if we later received current content's rating?
-    // const fetchData = async () => {
-    //   try {
-    //     const res = await fetch(`https://${host}/content/${id}`)
-    //     const data = await res.json()
-    //   } catch (err: any) {
-    //     throw new Error(err.message)
-    //   }
-    // }
-    // fetchData()
-  }, [data])
+  // useEffect(() => {
+  // TODO: What should happen if we later received current content's rating?
+  // if(data !== null) setRating(data.rating)
+  // }, [data])
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (isSubmitting) return
-    setSubmitting(true)
 
     try {
       // TODO: Try patch new content to server
@@ -53,9 +43,7 @@ const Edit = () => {
       navigate(`/content/${id}`)
     } catch (err: any) {
       // TODO: Handling error
-      throw new Error(err.message)
-    } finally {
-      setSubmitting(false)
+      alert(err.message)
     }
   }
 
@@ -63,13 +51,13 @@ const Edit = () => {
     setRating(newrating)
   }
 
-  if (error) return <h1>Error</h1>
   if (loading) return <Loading />
-  if (!ready) return <Loading />
+  if (!ready) {
+    if (error) return <Error message={`${error}`} />
+    return <Loading />
+  }
 
   const { comment, rating } = data!
-
-  // if (isSubmitting) return <Navigate to="/" />
 
   return (
     <div className={classes.container}>
@@ -92,9 +80,7 @@ const Edit = () => {
           </div>
         </div>
         <div className={classes.formGroup}>
-          <button type="submit" disabled={isSubmitting}>
-            Edit
-          </button>
+          <button type="submit">Edit</button>
         </div>
       </form>
     </div>

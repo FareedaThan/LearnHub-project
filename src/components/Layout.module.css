@@ -4,6 +4,8 @@
   align-items: center;
   padding: 12px 48px;
   background-color: var(--navy);
+  position: sticky;
+  top: 0;
 }
 
 .nav {
